@@ -1,0 +1,49 @@
+{
+  "name": "commander-demo",
+  "version": "1.0.0",
+  "description": "",
+  "bin": {
+    "ktu": "./run.js"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chalk": "^4.0.0",
+    "commander": "^5.1.0",
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.5.2",
+    "csv-loader": "^3.0.3",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^6.0.0",
+    "html-webpack-plugin": "^4.2.0",
+    "lodash": "^4.17.15",
+    "mini-css-extract-plugin": "^0.9.0",
+    "style-loader": "^1.1.4",
+    "url-loader": "^4.1.0",
+    "vue-loader": "^15.9.1",
+    "vue-template-compiler": "^2.6.11",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3",
+    "webpack-merge": "^4.2.2",
+    "xml-loader": "^1.2.1"
+  },
+  "dependencies": {
+    "lodash": "^4.17.15",
+    "autoprefixer": "^9.7.6",
+    "build": "^0.1.4",
+    "dart-sass": "^1.25.0",
+    "postcss-loader": "^3.0.0",
+    "run": "^1.4.0",
+    "sass-loader": "^8.0.2",
+    "vue": "^2.6.11",
+    "vue-virtual-scroller": "^1.0.10"
+  }
+}
