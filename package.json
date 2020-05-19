@@ -3,29 +3,40 @@
   "version": "1.0.0",
   "description": "",
   "bin": {
-    "ktu": "./run.js"
+    "we": "./run.js"
   },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "eslint --fix src/**/*.js && we build"
+    }
+  },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "chalk": "^4.0.0",
-    "commander": "^5.1.0",
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.5",
+    "autoprefixer": "^9.8.0",
     "babel-loader": "^8.1.0",
+    "chalk": "^4.0.0",
     "clean-webpack-plugin": "^3.0.0",
+    "commander": "^5.1.0",
     "css-loader": "^3.5.2",
     "csv-loader": "^3.0.3",
+    "eslint": "^7.0.0",
+    "eslint-plugin-vue": "^6.2.2",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.2.0",
+    "husky": "^4.2.5",
     "lodash": "^4.17.15",
     "mini-css-extract-plugin": "^0.9.0",
+    "postcss-import": "^12.0.1",
     "style-loader": "^1.1.4",
+    "uglifyjs-webpack-plugin": "^2.2.0",
     "url-loader": "^4.1.0",
     "vue-loader": "^15.9.1",
     "vue-template-compiler": "^2.6.11",
@@ -37,7 +48,6 @@
   },
   "dependencies": {
     "lodash": "^4.17.15",
-    "autoprefixer": "^9.7.6",
     "build": "^0.1.4",
     "dart-sass": "^1.25.0",
     "postcss-loader": "^3.0.0",

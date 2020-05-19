@@ -43,12 +43,25 @@ function execWebpack(options) {
     });
 
 }
+
+function buildWebpack() {
+    const cmd = `webpack --config webpack\\ktu.prod.js`;
+    console.log(info(`---------运行：${cmd}---------`));
+    // 设置环境变量
+    process.env.NODE_ENV = 'dev';
+    process.env.DEV_ENV = 'dev';
+    const workerProcess = exec(cmd);
+    workerProcess.stdout.on('data', data => {
+        console.log(data);
+    })
+    workerProcess.stderr.on('data', data => {
+        console.log(data);
+    })
+}
+
 function validateWebpack(options) {
-    const {nodeEnv,devEnv,projectName} = options;
-    if(!projectName) {
-        console.error(error('##项目名错误'))
-        return false;
-    }
+    const {nodeEnv,devEnv} = options;
+
     if(_.indexOf(_vconf.NodeEnvs,nodeEnv) < 0) {
         console.error(error(`##部署环境错误，有效值为：${_vconf.NodeEnvs}`));
         return false;
@@ -59,7 +72,7 @@ function validateWebpack(options) {
     }
     const envType =nodeEnv === 'prod'?'prod':'dev';
     const isWatch =nodeEnv === 'dev'?'--watch':'';
-    const cmd = `${command.Webpack} webpack\\${projectName}.${envType}.js`;
+    const cmd = `${command.Webpack} webpack\\ktu.${envType}.js`;
     return {
         nodeEnv,
         devEnv,
@@ -73,7 +86,6 @@ program
     .option('-O, --open','启动web服务')
     .option('-N,--node-env <itemName>','部署环境变量','dev')
     .option('-D,--dev-env <itemName>','服务器环境变量','dev')
-    .option('-P,--project-name <itemName>','运行的项目名字','ktu')
     .action(function (option, otherD, cmd) {
         if(option.open) {
             console.log('启动web服务');
@@ -81,7 +93,6 @@ program
         execWebpack({
             nodeEnv: option.nodeEnv,
             devEnv: option.devEnv,
-            projectName: option.projectName,
         });
     });
 
@@ -97,5 +108,12 @@ program.on('--help', function (operands) {
     console.log('$ ktu run -O -P compress -N prod');
     console.log('$ ktu run -O -P compress -N prod -D prod');
 });
+
+program.command('build')
+    .alias('b')
+    .description('构建生产环境')
+    .action(function (option, otherD, cmd) {
+        buildWebpack();
+    });
 
 program.parse(process.argv);

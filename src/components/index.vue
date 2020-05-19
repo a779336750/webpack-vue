@@ -18,5 +18,7 @@
 </script>
 
 <style>
-
+    .example {
+        color: blue;
+    }
 </style>
