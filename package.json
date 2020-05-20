@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "bin": {
-    "we": "./run.js"
+    "we": "dev/command.js"
   },
   "main": "index.js",
   "scripts": {
