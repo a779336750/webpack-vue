@@ -44,5 +44,5 @@ module.exports = merge(common, {
             chunkFilename: "[id].css"
         })
     ],
-    mode: 'development'
+    mode: 'production'
 });
