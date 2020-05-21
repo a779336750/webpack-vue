@@ -11,7 +11,7 @@ const error = chalk.bold.red;
 
 // 定义一些指令集合
 const command = {
-    Webpack: 'webpack-dev-server --open --config',
+    Webpack: 'webpack',
     RunExpress: 'node dev/express.js',
 };
 
@@ -55,7 +55,8 @@ function execWebpack(options) {
         process.exit();
         return;
     }
-    const {cmd, nodeEnv, devEnv} = commandObj;
+    const cmd = 'webpack --watch --config webpack\\ktu.dev.js';
+    const {nodeEnv, devEnv} = commandObj;
     console.log(success('---------启动Webpack服务---------'));
     console.log(info('---------------------------------'));
     console.log(info(`---------部署环境为:${nodeEnv}---------`));
