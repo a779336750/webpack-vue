@@ -36,6 +36,7 @@ function copyFile(fileName, originPath, targetPath) {
         }
     })
 }
+
 function cleanFile(path) {
     deleteFiles(path);
     mkdir(path);
