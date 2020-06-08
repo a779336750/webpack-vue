@@ -31,4 +31,4 @@ jobs:
         access-key-id: ${{ secrets.oss_username }}
         access-key-secret: ${{ secrets.oss_password }}
     - name: cp files to aliyun
-      run: ossutil cp -rf dist oss://home/webpack-vue
+      run: ossutil cp -rf dist oss://webpack-vue/
