@@ -23,13 +23,6 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 10.x
-    # npm install
-    - name: npm install and build
-      run: |
-        npm install
-        npm run build
-      env:
-        CI: true
     # 设置阿里云OSS的 id/secret，存储到 github 的 secrets 中
     - name: setup aliyun oss
       uses: manyuanrong/setup-ossutil@master
