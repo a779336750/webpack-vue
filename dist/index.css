@@ -1,0 +1,23 @@
+
+.wraper[data-v-b8dd2314] {
+    width: 100px;
+    height: 200px;
+    overflow-y: scroll;
+}
+.scroller[data-v-b8dd2314] {
+    height: 100%;
+}
+.user[data-v-b8dd2314] {
+    height: 32%;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+}
+
+
+.example {
+    color: blue;
+}
+
+
+/*# sourceMappingURL=index.css.map*/
