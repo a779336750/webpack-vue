@@ -26,6 +26,7 @@ function checkExpress() {
 
         // 端口已经被使用
         server.on('error', err => {
+            console.log(error('端口已被占用'));
             if (err.code === 'EADDRINUSE') {
                 reject();
             }

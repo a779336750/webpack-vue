@@ -1,6 +1,11 @@
+/**
+ * node实现文件复制，将dist目录下的文件复制到build目录下
+ */
+
 const path = require('path');
 const fs = require('fs');
 
+//将相对路径转换成绝对路径
 const buildPath = path.resolve(__dirname, '../build');
 const distPath = path.resolve(__dirname, '../dist');
 
@@ -11,10 +16,12 @@ fs.readdir(distPath, (err, files) => {
 async function readAndCopyDir(originPath, targetPath) {
     const dirName = originPath.split('\\')[originPath.split('\\').length - 1];
     if (!RegExp(`${dirName}$`).test(targetPath)) {
+        //将给定的path连接起来
         targetPath = path.join(targetPath, dirName);
     }
     mkdir(targetPath);
 
+    // 读取目录的内容。 回调有两个参数 (err, files)
     fs.readdir(originPath,  (err, files) => {
         cleanFile(targetPath);
         files.forEach(file => {
@@ -59,8 +66,10 @@ function deleteFiles(path) {
 }
 
 function mkdir(targetPath) {
+    //判断给定的路径是否存在
     if (fs.existsSync(targetPath)) {
     } else {
+        // 同步地创建目录
         fs.mkdirSync(targetPath, (err) => {
         });
     }

@@ -33,7 +33,7 @@ app.use('/', express.static(path.join(__dirname,'../dist')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
-const server =app.listen(_vconf.ExpressPort, ()=>{
+const server =app.listen(_vconf.ExpressPort, (res,res1)=>{
     const {host,port} = server.address();
     console.log('应用实例，访问地址为 http://%s:%s', host, port);
 });
