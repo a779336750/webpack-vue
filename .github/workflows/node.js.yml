@@ -23,5 +23,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 10.x
+    - name: npm install
+      run: npm install
     - name: deploy
       run: node deploy/index.js
