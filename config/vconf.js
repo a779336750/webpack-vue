@@ -1,6 +1,6 @@
 const Config = {
     // express 服务端口
-    ExpressPort: 8080,
+    ExpressPort: 3030,
 
     // 部署环境有效值
     NodeEnvs: ['dev', 'devprod', 'prod'],
