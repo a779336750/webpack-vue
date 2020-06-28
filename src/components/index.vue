@@ -1,6 +1,7 @@
 <template>
     <div class="example">
-        <VirtualScroller></VirtualScroller>
+        <div class="box1">aaaa</div>
+        <div class="box2">bbbbb</div>
     </div>
 </template>
 <script>
@@ -17,8 +18,16 @@
     }
 </script>
 
-<style>
+<style lang="scss">
     .example {
         color: blue;
+        .box1, .box2 {
+            width: 200px;
+            height: 200px;
+            background: url("../image/aaaa.png");
+        }
+        .box2 {
+            background: url("../image/ccc.png");
+        }
     }
 </style>

@@ -1,18 +1,6 @@
 <template>
-
     <div class="wraper">
-        <RecycleScroller
 
-                class="scroller"
-                :items="list"
-                :item-size="50"
-                key-field="id"
-                v-slot="{ item }"
-        >
-            <div class="user">
-                {{ item.name }}
-            </div>
-        </RecycleScroller>
     </div>
 
 </template>
@@ -48,6 +36,7 @@
         width: 100px;
         height: 200px;
         overflow-y: scroll;
+        background: url("../../image/aaaa.png");
     }
     .scroller {
         height: 100%;

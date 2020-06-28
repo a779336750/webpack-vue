@@ -29,15 +29,18 @@ module.exports = {
                     }
                 }
             },
-
             {
-                test: /\.(png|svg|jpg|gif)$/,
-                use: {
-                    loader: 'file-loader',
-                    options: {
-                        outputPath: 'images/',
+                test: /\.(png|jpg|gif)$/,
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: 1000,
+                            outputPath: 'images/',
+                            fallback:  'file-loader',
+                        },
                     }
-                }
+                ]
             },
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/,
@@ -49,17 +52,7 @@ module.exports = {
                     }
                 }
             },
-            {
-                test: /\.(png|jpg|gif)$/,
-                use: [
-                    {
-                        loader: 'url-loader',
-                        options: {
-                            limit: 1000
-                        }
-                    }
-                ]
-            },
+
             {
                 test: /\.(csv|tsv)$/,
                 use: [
