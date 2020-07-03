@@ -1,12 +1,14 @@
 const path = require('path');
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const info = process.argv.filter(element => /--param=/.test(element))[0];
 const target = info.split('=')[1];
 const buildArr = target.split(',');
+const smp = new SpeedMeasurePlugin();
 module.exports = function () {
-    return merge(common({project: buildArr[0]}), {
+    return smp.wrap(merge(common({project: buildArr[0]}), {
         devtool: 'source-map',
         module: {
             rules: [
@@ -53,5 +55,5 @@ module.exports = function () {
             path: path.resolve(__dirname, `../build/${buildArr[0]}/`)
         },
         mode: 'production'
-    });
+    }));
 }
