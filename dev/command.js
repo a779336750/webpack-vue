@@ -81,19 +81,47 @@ function execWebpack(options) {
 
 }
 
-function buildWebpack() {
-    const cmd = `webpack --config webpack\\ktu.prod.js`;
-    console.log(info(`---------运行：${cmd}---------`));
+function buildWebpack(options) {
+    // const {project} = config;
+    // const cmd = `webpack --config webpack\\ktu.prod.js`;
+    // console.log(info(`---------运行：${cmd}---------`));
+    // // 设置环境变量
+    // process.env.NODE_ENV = 'dev';
+    // process.env.DEV_ENV = 'dev';
+    // const workerProcess = exec(cmd);
+    // workerProcess.stdout.on('data', data => {
+    //     console.log(data);
+    // })
+    // workerProcess.stderr.on('data', data => {
+    //     console.log(data);
+    // })
+
+    const commandObj = validateWebpack(options);
+    if (!commandObj) {
+        process.exit();
+        return;
+    }
+    const { nodeEnv,devEnv,cmd,project} = commandObj;
+    console.log(success('---------启动Webpack服务---------'));
+    console.log(info('---------------------------------'));
+    console.log(info(`---------部署项目为为:${project}---------`));
+    console.log(info(`---------部署环境为:${nodeEnv}---------`));
+    console.log(info(`---------服务器环境为:${devEnv}---------`));
+
     // 设置环境变量
-    process.env.NODE_ENV = 'dev';
-    process.env.DEV_ENV = 'dev';
+    process.env.NODE_ENV = nodeEnv;
+    process.env.DEV_ENV = devEnv;
+    console.log(info(`---------运行：${cmd}---------`));
+
     const workerProcess = exec(cmd);
+    // 监听执行执行过程中的输出信息，并打印出来
     workerProcess.stdout.on('data', data => {
         console.log(data);
-    })
+    });
+
     workerProcess.stderr.on('data', data => {
         console.log(data);
-    })
+    });
 }
 
 function validateWebpack(options) {
@@ -161,8 +189,15 @@ program.on('--help', function (operands) {
 program.command('build')
     .alias('b')
     .description('构建生产环境')
+    .option('-P, --project <itemName>','项目名称', 'ktu')
+    .option('-N,--node-env <itemName>', '部署环境变量', 'prod')
+    .option('-D,--dev-env <itemName>', '服务器环境变量', 'prod')
     .action(function (option, otherD, cmd) {
-        buildWebpack();
+        buildWebpack({
+            project: option.project,
+            nodeEnv: option.nodeEnv,
+            devEnv: option.devEnv,
+        });
     });
 
 program.parse(process.argv);

@@ -13,7 +13,6 @@ const {createProxyMiddleware} = require('http-proxy-middleware');
 const path = require('path');
 
 const app = new express();
-const upload = new multer();
 
 const targetHost = 'http: localhost:3030';
 /**
