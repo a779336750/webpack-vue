@@ -11,7 +11,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "eslint --fix src/**/*.js && we build && node dev/buildFile.js"
+      "pre-commit": "eslint --fix src/**/*.js && we build && node dev/buildFile.js",
+      "commit-msg": "commitlint -e $GIT_PARAMS"
     }
   },
   "author": "",
@@ -24,6 +25,9 @@
     "chalk": "^4.0.0",
     "clean-webpack-plugin": "^3.0.0",
     "commander": "^5.1.0",
+    "commitizen": "^4.1.2",
+    "commitlint": "^9.0.1",
+    "conventional-changelog-cli": "^2.0.34",
     "css-loader": "^3.5.2",
     "csv-loader": "^3.0.3",
     "eslint": "^7.0.0",
@@ -39,6 +43,7 @@
     "style-loader": "^1.1.4",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "url-loader": "^4.1.0",
+    "vue-cli-plugin-commitlint": "^1.0.12",
     "vue-loader": "^15.9.1",
     "vue-template-compiler": "^2.6.11",
     "webpack": "^4.42.1",
