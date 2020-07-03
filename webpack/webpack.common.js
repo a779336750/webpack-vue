@@ -3,6 +3,10 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
+const HappyPack = require('happypack');
+const os = require('os');
+const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
+
 module.exports = function (config) {
     const {project} = config;
     return {
@@ -23,26 +27,11 @@ module.exports = function (config) {
                 {
                     test: /\.m?js$/,
                     exclude: /(node_modules|bower_components)/,
-                    use: {
-                        loader: 'babel-loader',
-                        options: {
-                            presets: ['@babel/preset-env'],
-                            plugins: ['@babel/plugin-proposal-object-rest-spread']
-                        }
-                    }
+                    use: 'happypack/loader?id=babel',
                 },
                 {
                     test: /\.(png|jpg|gif|svg)$/,
-                    use: [
-                        {
-                            loader: 'url-loader',
-                            options: {
-                                limit: 1000,
-                                outputPath: 'images/',
-                                fallback: 'file-loader',
-                            },
-                        }
-                    ]
+                    use: 'happypack/loader?id=url',
                 },
                 {
                     test: /\.(woff|woff2|eot|ttf|otf)$/,
@@ -72,6 +61,31 @@ module.exports = function (config) {
         plugins: [
             // 请确保引入这个插件！
             new VueLoaderPlugin(),
+            new HappyPack({
+                id: 'babel',
+                loaders: [{
+                    path: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env'],
+                        plugins: ['@babel/plugin-proposal-object-rest-spread']
+                    }
+                }],
+                // 共享进程池
+                threadPool: happyThreadPool,
+            }),
+            new HappyPack({
+                id: 'url',
+                loaders: [{
+                    path: 'url-loader',
+                    options: {
+                        limit: 1000,
+                        outputPath: 'images/',
+                        fallback: 'file-loader',
+                    },
+                }],
+                // 共享进程池
+                threadPool: happyThreadPool,
+            }),
             new CleanWebpackPlugin(),
             new HtmlWebpackPlugin({
                 title: 'Production',

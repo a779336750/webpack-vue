@@ -1,8 +1,5 @@
 <template>
     <div class="example">
-<!--        <div class="box1">aaaa</div>-->
-<!--        <div class="box2">bbbbb</div>-->
-<!--        <Page :current="1" :total="100"></Page>-->
         <demo1 :list="list"></demo1>
         <button @click="changeList">click</button>
     </div>

@@ -6,8 +6,9 @@ const info = process.argv.filter(element => /--param=/.test(element))[0];
 const target = info.split('=')[1];
 const buildArr = target.split(',');
 const smp = new SpeedMeasurePlugin();
+
 module.exports = function () {
-    return smp(merge(common({project: buildArr[0]}), {
+    return smp.wrap(merge(common({project: buildArr[0]}), {
         devtool: 'inline-source-map',
         module: {
             rules: [
