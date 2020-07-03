@@ -7,6 +7,8 @@ const Config = {
 
     // 服务器环境有效值
     DevEnvs: ['dev', 'prepro', 'prod'],
+
+    ProjectList: ['ktu', 'blog', 'mark']
 };
 
 module.exports = Config;

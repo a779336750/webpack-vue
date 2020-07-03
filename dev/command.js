@@ -34,10 +34,11 @@ function checkExpress() {
     })
 }
 
-function runExpress() {
+function runExpress(config) {
+    const {project} = config;
     checkExpress().then(() => {
         console.log(success('---------启动Express服务---------'));
-        const cmd = command.RunExpress;
+        const cmd = `${command.RunExpress} --project=${project}`;
         const workerProcess = exec(cmd,()=>{});
         workerProcess.stdout.on('data', data => {
             console.log(data);
@@ -56,10 +57,10 @@ function execWebpack(options) {
         process.exit();
         return;
     }
-    const cmd = 'webpack --watch --config webpack\\ktu.dev.js';
-    const {nodeEnv, devEnv} = commandObj;
+    const { nodeEnv,devEnv,cmd,project} = commandObj;
     console.log(success('---------启动Webpack服务---------'));
     console.log(info('---------------------------------'));
+    console.log(info(`---------部署项目为为:${project}---------`));
     console.log(info(`---------部署环境为:${nodeEnv}---------`));
     console.log(info(`---------服务器环境为:${devEnv}---------`));
 
@@ -96,8 +97,16 @@ function buildWebpack() {
 }
 
 function validateWebpack(options) {
-    const {nodeEnv, devEnv} = options;
+    const {nodeEnv, devEnv, project} = options;
 
+    if (_.indexOf(_vconf.ProjectList, project) < 0) {
+        console.error(error(`##部署环境错误，项目不存在，有效的项目有${_vconf.ProjectList}`));
+        return false;
+    }
+    if (_.indexOf(_vconf.NodeEnvs, nodeEnv) < 0) {
+        console.error(error(`##部署环境错误，有效值为：${_vconf.NodeEnvs}`));
+        return false;
+    }
     if (_.indexOf(_vconf.NodeEnvs, nodeEnv) < 0) {
         console.error(error(`##部署环境错误，有效值为：${_vconf.NodeEnvs}`));
         return false;
@@ -106,13 +115,14 @@ function validateWebpack(options) {
         console.error(error(`##服务器环境错误，有效值为：${_vconf.DevEnvs}`));
         return false;
     }
-    const envType = nodeEnv === 'prod' ? 'prod' : 'dev';
     const isWatch = nodeEnv === 'dev' ? '--watch' : '';
-    const cmd = `${command.Webpack} webpack\\ktu.${envType}.js`;
+    const envType = nodeEnv === 'prod' ? 'prod' : 'dev';
+    const cmd = `${command.Webpack} ${isWatch} --config webpack\\webpack.${envType}.js --param=${project},${envType}`;
     return {
         nodeEnv,
         devEnv,
         cmd,
+        project
     }
 }
 
@@ -121,14 +131,18 @@ program
     .alias('r')
     .description('运行项目')
     .option('-O, --open', '启动web服务')
+    .option('-P,--project <itemName>', '项目名称', 'ktu')
     .option('-N,--node-env <itemName>', '部署环境变量', 'dev')
     .option('-D,--dev-env <itemName>', '服务器环境变量', 'dev')
     .action(function (option, otherD, cmd) {
         if (option.open) {
             console.log('启动web服务');
-            runExpress();
+            runExpress({
+                project: option.project,
+            });
         }
         execWebpack({
+            project: option.project,
             nodeEnv: option.nodeEnv,
             devEnv: option.devEnv,
         });

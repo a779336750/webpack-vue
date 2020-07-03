@@ -1,6 +1,7 @@
 <template>
     <div class="example">
-        {{ msg }}
+        <div >{{list.name}}</div>
+
     </div>
 </template>
 <script>
@@ -9,6 +10,9 @@
             return {
                 msg: 'Hello world!',
             }
+        },
+        props: {
+            list: Array
         }
     }
 </script>
