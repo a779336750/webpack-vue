@@ -5,39 +5,45 @@
     </div>
 </template>
 <script>
-    import demo1 from './demo1.vue'
-    export default {
-        data () {
-            return {
-                msg: 'Hello world!',
-                list: [
-                    {
-                        name: 'dick',
-                    },
-                    {
-                        name: 'mark',
-                    },
-                ]
-            }
-        },
-        components: {
-            demo1,
-        },
-        watch: {
-            list: {
-                handler() {
-                    console.log(this.list);
+import demo1 from './demo1.vue'
+export default {
+    data () {
+
+        return {
+            msg: 'Hello world!',
+            list: [
+                {
+                    name: 'dick',
                 },
-                deep: true
-            }
-        },
-        methods: {
-            changeList() {
-                // this.list.push({ name: this.list.length });
-                this.list[0].name = 0;
-            }
+                {
+                    name: 'mark',
+                },
+            ]
+        }
+
+    },
+    components: {
+        demo1,
+    },
+    watch: {
+        list: {
+            handler () {
+
+                console.log(this.list);
+
+            },
+            deep: true
+        }
+    },
+    methods: {
+        changeList () {
+
+            // This.list.push({ name: this.list.length });
+            this.list[0].name = 0;
+
         }
     }
+}
 </script>
 
 <style lang="scss">

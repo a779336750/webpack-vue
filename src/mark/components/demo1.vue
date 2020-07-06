@@ -5,16 +5,18 @@
     </div>
 </template>
 <script>
-    export default {
-        data () {
-            return {
-                msg: 'Hello world!',
-            }
-        },
-        props: {
-            list: Array
+export default {
+    data () {
+
+        return {
+            msg: 'Hello world!',
         }
+
+    },
+    props: {
+        list: Array
     }
+}
 </script>
 
 <style scoped>

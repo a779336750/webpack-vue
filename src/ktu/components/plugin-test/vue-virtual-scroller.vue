@@ -5,30 +5,32 @@
 
 </template>
 <script>
-    export default {
-        data() {
-            return {
-                list: [
-                    {
-                        name:'jason',
-                        id: 1
-                    },
-                    {
-                        name:'jason',
-                        id: 2
-                    },
-                    {
-                        name:'jason',
-                        id: 3
-                    },
-                    {
-                        name:'jason',
-                        id: 4
-                    },
-                ]
-            }
+export default {
+    data () {
+
+        return {
+            list: [
+                {
+                    name: 'jason',
+                    id: 1
+                },
+                {
+                    name: 'jason',
+                    id: 2
+                },
+                {
+                    name: 'jason',
+                    id: 3
+                },
+                {
+                    name: 'jason',
+                    id: 4
+                },
+            ]
         }
+
     }
+}
 </script>
 
 <style scoped>
