@@ -6,15 +6,15 @@
 </template>
 <script>
     export default {
-        data () {
+        data() {
             return {
                 msg: 'Hello world!',
-            }
+            };
         },
         props: {
-            list: Object
-        }
-    }
+            list: Object,
+        },
+    };
 </script>
 
 <style scoped>

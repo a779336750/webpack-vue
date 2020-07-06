@@ -1,5 +1,5 @@
 const path = require('path');
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
@@ -8,21 +8,22 @@ const os = require('os');
 const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 
 module.exports = function (config) {
-    const {project} = config;
+    const { project } = config;
+
     return {
         entry: {
             index: `./src/${project}/index.js`,
         },
         optimization: {
             splitChunks: {
-                chunks: "all",
+                chunks: 'all',
             },
         },
         module: {
             rules: [
                 {
                     test: /\.vue$/,
-                    loader: 'vue-loader'
+                    loader: 'vue-loader',
                 },
                 {
                     test: /\.m?js$/,
@@ -40,61 +41,64 @@ module.exports = function (config) {
                         options: {
                             name: '[name].[ext]?[hash]',
                             outputPath: 'font/',
-                        }
-                    }
+                        },
+                    },
                 },
 
                 {
                     test: /\.(csv|tsv)$/,
-                    use: [
-                        'csv-loader'
-                    ]
+                    use: ['csv-loader'],
                 },
                 {
                     test: /\.xml$/,
-                    use: [
-                        'xml-loader'
-                    ]
+                    use: ['xml-loader'],
                 },
-            ]
+            ],
         },
         plugins: [
             // 请确保引入这个插件！
             new VueLoaderPlugin(),
             new HappyPack({
                 id: 'babel',
-                loaders: [{
-                    path: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env'],
-                        plugins: ['@babel/plugin-proposal-object-rest-spread']
-                    }
-                }],
+                loaders: [
+                    {
+                        path: 'babel-loader',
+                        options: {
+                            presets: ['@babel/preset-env'],
+                            plugins: ['@babel/plugin-proposal-object-rest-spread'],
+                        },
+                    },
+                ],
                 // 共享进程池
                 threadPool: happyThreadPool,
             }),
             new HappyPack({
                 id: 'url',
-                loaders: [{
-                    path: 'url-loader',
-                    options: {
-                        limit: 1000,
-                        outputPath: 'images/',
-                        fallback: 'file-loader',
+                loaders: [
+                    {
+                        path: 'url-loader',
+                        options: {
+                            limit: 1000,
+                            outputPath: 'images/',
+                            fallback: 'file-loader',
+                        },
                     },
-                }],
+                ],
                 // 共享进程池
                 threadPool: happyThreadPool,
             }),
             new CleanWebpackPlugin(),
             new HtmlWebpackPlugin({
                 title: 'Production',
-                template: `./src/${project}/index.html`
+                template: `./src/${project}/index.html`,
             }),
         ],
         output: {
             filename: '[name].[chunkhash].js',
-            path: path.resolve(__dirname, `../dist/${project}/`)
-        }
-    }
-}
+            path: path.resolve(
+                __dirname,
+                `../dist/${project}/`,
+            ),
+        },
+    };
+};

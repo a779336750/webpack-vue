@@ -4,7 +4,7 @@ const request = require('request');
 const uploadUrl = 'http://localhost:3000/upload/';
 const clearUrl = 'http://localhost:3000/upload/clear';
 
-request(clearUrl,function optionalCallback(err, httpResponse, body) {
+request(clearUrl, (err, httpResponse, body) => {
     if (err) {
         return console.error('upload failed:', err);
     }
@@ -18,22 +18,21 @@ function uploadFile(distPath) {
             files.forEach(file => {
                 const currentPath = path.join(distPath, file);
                 if (!fs.statSync(currentPath).isDirectory()) {
-                    var r = request.post(uploadUrl,function optionalCallback(err, httpResponse, body) {
+                    const r = request.post(uploadUrl, (err, httpResponse, body) => {
                         if (err) {
                             return console.error('upload failed:', err);
                         }
                         console.log(body);
                     });
-                    var form = r.form();
+                    const form = r.form();
                     form.append('my_field', 'my_value');
-                    form.append('dir', currentPath.replace(/\\/g,"/").split('/dist/')[1]);
+                    form.append('dir', currentPath.replace(/\\/g, '/').split('/dist/')[1]);
                     form.append('data', fs.createReadStream(currentPath));
                 } else {
                     uploadFile(currentPath);
                 }
-            })
+            });
         }
     });
 }
-
 

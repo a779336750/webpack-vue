@@ -5,9 +5,9 @@
     </div>
 </template>
 <script>
-    import demo1 from './demo1.vue'
+    import demo1 from './demo1.vue';
     export default {
-        data () {
+        data() {
             return {
                 msg: 'Hello world!',
                 list: [
@@ -17,8 +17,8 @@
                     {
                         name: 'mark',
                     },
-                ]
-            }
+                ],
+            };
         },
         components: {
             demo1,
@@ -28,16 +28,16 @@
                 handler() {
                     console.log(this.list);
                 },
-                deep: true
-            }
+                deep: true,
+            },
         },
         methods: {
             changeList() {
-                // this.list.push({ name: this.list.length });
+                // This.list.push({ name: this.list.length });
                 this.list[0].name = 0;
-            }
-        }
-    }
+            },
+        },
+    };
 </script>
 
 <style lang="scss">

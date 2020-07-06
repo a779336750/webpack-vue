@@ -8,7 +8,7 @@ const multer = require('multer');
 
 const _vconf = require('../config/vconf');
 
-const {createProxyMiddleware} = require('http-proxy-middleware');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const path = require('path');
 
@@ -29,11 +29,11 @@ app.use('/ajax/*', createProxyMiddleware({
 
 const info = process.argv.filter(element => /--project=/.test(element))[0];
 const project = info.split('=')[1];
-app.use(`/${project}`, express.static(path.join(__dirname,`../dist/${project}`)));
+app.use(`/${project}`, express.static(path.join(__dirname, `../dist/${project}`)));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-const server =app.listen(_vconf.ExpressPort, (res,res1)=>{
-    const {port} = server.address();
-    console.log('应用实例，访问地址为 http://%s:%s/%s', 'http:localhost', port,project);
+const server = app.listen(_vconf.ExpressPort, (res, res1) => {
+    const { port } = server.address();
+    console.log('应用实例，访问地址为 http://%s:%s/%s', 'http:localhost', port, project);
 });

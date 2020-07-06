@@ -5,12 +5,12 @@
 </template>
 <script>
     export default {
-        data () {
+        data() {
             return {
                 msg: 'Hello world!',
-            }
-        }
-    }
+            };
+        },
+    };
 </script>
 
 <style scoped>
