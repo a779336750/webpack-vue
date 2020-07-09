@@ -6,7 +6,15 @@ const info = process.argv.filter(element => (/--param=/).test(element))[0];
 const target = info.split('=')[1];
 const buildArr = target.split(',');
 const smp = new SpeedMeasurePlugin();
+const request = require('request');
 
+class DonePlugin {
+    apply(compiler) {
+        compiler.hooks.done.tap('DonePlugin', () => {
+            request('http://localhost:3030/compileDone', (err, httpResponse, body) => {});
+        });
+    }
+}
 module.exports = function () {
     return smp.wrap(merge(
         common({ project: buildArr[0] }),
@@ -49,6 +57,7 @@ module.exports = function () {
                     filename: '[name].css',
                     chunkFilename: '[id].css',
                 }),
+                new DonePlugin(),
             ],
             mode: 'development',
         },
