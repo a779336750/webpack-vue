@@ -1,7 +1,6 @@
 <template>
     <div class="example">
         <div >{{list.name}}</div>
-
     </div>
 </template>
 <script>

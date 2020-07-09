@@ -2,17 +2,18 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
-
+const webpack = require('webpack');
 const HappyPack = require('happypack');
 const os = require('os');
 const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
+const hotMiddlewareScript = 'webpack-hot-middleware/client';
 
 module.exports = function (config) {
     const { project } = config;
 
     return {
         entry: {
-            index: `./src/${project}/index.js`,
+            index: [`./src/${project}/index.js`, hotMiddlewareScript],
         },
         optimization: {
             splitChunks: {
@@ -92,6 +93,7 @@ module.exports = function (config) {
                 title: 'Production',
                 template: `./src/${project}/index.html`,
             }),
+            new webpack.HotModuleReplacementPlugin(),
         ],
         output: {
             filename: '[name].[chunkhash].js',
