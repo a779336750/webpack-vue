@@ -1,7 +1,6 @@
 <template>
     <div class="example">
-        sadsaas
-        <button @click="changeList">click</button>
+        ktusadasdsa
     </div>
 </template>
 <script>

@@ -45,55 +45,12 @@ function checkExpress() {
 function runExpress(config) {
     const { project } = config;
 
-    checkExpress().then(() => {
-        console.log(success('---------启动Express服务---------'));
-        const cmd = `${command.RunExpress} --project=${project}`;
-        const workerProcess = exec(
-            cmd,
-            () => {},
-        );
-
-        workerProcess.stdout.on(
-            'data',
-            data => {
-                console.log(data);
-            },
-        );
-        workerProcess.stderr.on(
-            'data',
-            data => {
-                console.log(data);
-            },
-        );
-    }).
-        catch(error => {
-            console.log(error);
-        });
-}
-
-function execWebpack(options) {
-    const commandObj = validateWebpack(options);
-
-    if (!commandObj) {
-        process.exit();
-
-        return;
-    }
-    const { nodeEnv, devEnv, cmd, project } = commandObj;
-
-    console.log(success('---------启动Webpack服务---------'));
-    console.log(info('---------------------------------'));
-    console.log(info(`---------部署项目为为:${project}---------`));
-    console.log(info(`---------部署环境为:${nodeEnv}---------`));
-    console.log(info(`---------服务器环境为:${devEnv}---------`));
-
-    // 设置环境变量
-    process.env.NODE_ENV = nodeEnv;
-    process.env.DEV_ENV = devEnv;
-    console.log(info(`---------运行：${cmd}---------`));
-
-    const workerProcess = exec(cmd);
-    // 监听执行执行过程中的输出信息，并打印出来
+    console.log(success('---------启动Express服务---------'));
+    const cmd = `${command.RunExpress} --project=${project}`;
+    const workerProcess = exec(
+        cmd,
+        () => {},
+    );
 
     workerProcess.stdout.on(
         'data',
@@ -101,7 +58,6 @@ function execWebpack(options) {
             console.log(data);
         },
     );
-
     workerProcess.stderr.on(
         'data',
         data => {
@@ -226,11 +182,6 @@ program.
                 project: option.project,
             });
         }
-        /* execWebpack({
-               project: option.project,
-               nodeEnv: option.nodeEnv,
-               devEnv: option.devEnv,
-           }); */
     });
 
 program.on(

@@ -1,9 +1,6 @@
 <template>
     <div class="example">
-        asdasa
-        sadas
-        <demo1 :list="list"></demo1>
-        <button @click="changeList">click</button>
+        imarksadasds
     </div>
 </template>
 <script>
