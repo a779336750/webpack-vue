@@ -1,6 +1,6 @@
 <template>
     <div class="example">
-        ktusadasdsa
+        ktu
     </div>
 </template>
 <script>

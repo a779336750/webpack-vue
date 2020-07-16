@@ -1,6 +1,7 @@
 const express = require('express');
 
 const bodyParser = require('body-parser');
+const path = require('path');
 
 const cookieParser = require('cookie-parser');
 
@@ -16,7 +17,7 @@ const compiler = webpack(getWebpackDevConfig(project));
 
 const net = require('net');
 
-function portIsOccupied(port) {
+function getPort(port) {
     const server = net.createServer().listen(port);
     return new Promise((resolve, reject) => {
         server.on('listening', () => {
@@ -36,21 +37,22 @@ function portIsOccupied(port) {
         });
     });
 }
-portIsOccupied(ExpressPort).then(port => {
+getPort(ExpressPort).then(port => {
     app.use(require('webpack-dev-middleware')(compiler, {
-        // writeToDisk: true,
+        writeToDisk: true,
     }));
     app.use(require('webpack-hot-middleware')(compiler, {
         log: console.log, path: '/__webpack_hmr', heartbeat: 10 * 1000,
     }));
 
+    app.use(`/dist/`, express.static(path.join(__dirname, `../dist/`)));
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(cookieParser());
     const server = app.listen(port, (res, res1) => {
         const { port } = server.address();
         const address = `http://localhost:${port}/index.html`;
-        console.log('应用实例，访问地址为 http://%s:%s/%s', 'http:localhost', port, project);
+        console.log('应用实例，访问地址为 http://%s:%s/%s', 'http:localhost', port, 'index.html');
         const c = require('child_process');
         // 使用默认浏览器打开
         c.exec(`start ${address}`);

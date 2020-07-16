@@ -1,6 +1,6 @@
 <template>
     <div class="example">
-        imarksadasds
+        mark
     </div>
 </template>
 <script>
