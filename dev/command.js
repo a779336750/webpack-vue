@@ -226,11 +226,11 @@ program.
                 project: option.project,
             });
         }
-        execWebpack({
-            project: option.project,
-            nodeEnv: option.nodeEnv,
-            devEnv: option.devEnv,
-        });
+        /* execWebpack({
+               project: option.project,
+               nodeEnv: option.nodeEnv,
+               devEnv: option.devEnv,
+           }); */
     });
 
 program.on(

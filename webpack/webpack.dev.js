@@ -1,24 +1,29 @@
+const webpack = require('webpack');
+const path = require('path');
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
-const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const info = process.argv.filter(element => (/--param=/).test(element))[0];
-const target = info.split('=')[1];
-const buildArr = target.split(',');
-const smp = new SpeedMeasurePlugin();
-const request = require('request');
+/* const _vconf = require('../config/vconf');
+   const WebSocket = require('ws');
+   const socket = new WebSocket(`ws://localhost:${_vconf.WebsocketPort}/refresh`);
 
-class DonePlugin {
-    apply(compiler) {
-        compiler.hooks.done.tap('DonePlugin', () => {
-            request('http://localhost:3030/compileDone', (err, httpResponse, body) => {});
-        });
-    }
-}
-module.exports = function () {
-    return smp.wrap(merge(
-        common({ project: buildArr[0] }),
+   // 自定义插件，用户监听webpack编译完成
+   class DonePlugin {
+       apply(compiler) {
+           compiler.hooks.done.tap('DonePlugin', () => {
+               socket.send(`compileDone`);
+           });
+       }
+   } */
+
+module.exports = function (project) {
+    return merge(
+        common({ project }),
         {
+            name: `${project}`,
+            entry: {
+                index: ['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000', `./src/${project}/index.js`],
+            },
             devtool: 'inline-source-map',
             module: {
                 rules: [
@@ -57,9 +62,18 @@ module.exports = function () {
                     filename: '[name].css',
                     chunkFilename: '[id].css',
                 }),
-                new DonePlugin(),
+                new webpack.HotModuleReplacementPlugin(),
+                new webpack.NoEmitOnErrorsPlugin(),
             ],
+            output: {
+                filename: '[name].[hash].js',
+                publicPath: `/`,
+                path: path.resolve(
+                    __dirname,
+                    `../dist/${project}/`,
+                ),
+            },
             mode: 'development',
         },
-    ));
+    );
 };

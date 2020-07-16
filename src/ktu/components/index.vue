@@ -1,6 +1,6 @@
 <template>
     <div class="example">
-        <demo1 :list="list"></demo1>
+        sadsaas
         <button @click="changeList">click</button>
     </div>
 </template>

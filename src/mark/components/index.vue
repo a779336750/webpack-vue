@@ -1,6 +1,7 @@
 <template>
     <div class="example">
-        aaaa
+        asdasa
+        sadas
         <demo1 :list="list"></demo1>
         <button @click="changeList">click</button>
     </div>
@@ -32,6 +33,7 @@
                 deep: true,
             },
         },
+
         methods: {
             changeList() {
                 // This.list.push({ name: this.list.length });

@@ -1,6 +1,9 @@
 const Config = {
     // express 服务端口
-    ExpressPort: 3030,
+    ExpressPort: 4040,
+
+    // Websocket 服务端口
+    WebsocketPort: 4141,
 
     // 部署环境有效值
     NodeEnvs: ['dev', 'devprod', 'prod'],
