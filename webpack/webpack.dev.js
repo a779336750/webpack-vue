@@ -16,9 +16,39 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
        }
    } */
 
+// 自定义插件，用户监听webpack编译完成
+class DonePlugin {
+    apply(compiler) {
+        compiler.hooks.done.tap('DonePlugin', () => {
+            console.log('compilation done!');
+        });
+    }
+}
+
+// 自定义插件，生成一个记录输出文件列表的txt文件
+class recordFilesPlugin {
+    apply(compiler) {
+        compiler.hooks.emit.tapAsync('recordFilesPlugin', (compilaton, cb) => {
+            let content = '生成的文件列表：\n';
+            Object.keys(compilaton.assets).forEach(fileName => {
+                content += `${fileName}\n`;
+            });
+            compilaton.assets['fileList.txt'] = {
+                source() {
+                    return content;
+                },
+                size() {
+                    return content.length;
+                },
+            };
+            cb();
+        });
+    }
+}
+
 module.exports = function (project) {
     return merge(
-        common({ project }),
+        common({project}),
         {
             name: `${project}`,
             entry: {
@@ -64,6 +94,8 @@ module.exports = function (project) {
                 }),
                 new webpack.HotModuleReplacementPlugin(),
                 new webpack.NoEmitOnErrorsPlugin(),
+                new DonePlugin(),
+                new recordFilesPlugin(),
             ],
             output: {
                 filename: '[name].[hash].js',
