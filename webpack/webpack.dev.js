@@ -48,11 +48,11 @@ class recordFilesPlugin {
 
 module.exports = function (project) {
     return merge(
-        common({project}),
+        common({ project }),
         {
             name: `${project}`,
             entry: {
-                index: ['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000', `./src/${project}/index.js`],
+                index: ['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000', `./src/${project}/index.ts`],
             },
             devtool: 'inline-source-map',
             module: {

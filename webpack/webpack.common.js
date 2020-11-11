@@ -11,7 +11,7 @@ module.exports = function (config) {
 
     return {
         entry: {
-            index: `./src/${project}/index.js`,
+            index: `./src/${project}/index.ts`,
         },
         optimization: {
             splitChunks: {
@@ -21,8 +21,9 @@ module.exports = function (config) {
         module: {
             rules: [
                 {
-                    test: /\.vue$/,
-                    loader: 'vue-loader',
+                    test: /\.ts$/,
+                    loader: 'ts-loader',
+                    options: { appendTsSuffixTo: [/\.vue$/] },
                 },
                 {
                     test: /\.m?js$/,
@@ -52,7 +53,17 @@ module.exports = function (config) {
                     test: /\.xml$/,
                     use: ['xml-loader'],
                 },
+                {
+                    test: /\.vue$/,
+                    loader: 'vue-loader',
+                },
             ],
+        },
+        resolve: {
+            extensions: ['.ts', '.tsx', '.js', '.vue', '.json'],
+            alias: {
+                vue$: 'vue/dist/vue.esm.js',
+            },
         },
         plugins: [
             // 请确保引入这个插件！
