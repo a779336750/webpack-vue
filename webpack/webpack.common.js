@@ -34,7 +34,7 @@ module.exports = function (config) {
                     use: 'happypack/loader?id=url',
                 },
                 {
-                    test: /\.(woff|woff2|eot|ttf|otf)$/,
+                    test: /\.(woff|woff2|eot|ttf|otf|json)$/,
                     use: {
                         loader: 'file-loader',
                         options: {

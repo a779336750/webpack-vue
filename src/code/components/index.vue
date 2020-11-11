@@ -1,10 +1,11 @@
 <template>
     <div class="example">
-        markaaaaaa
+        <button @click="showLog('name')">click</button>
     </div>
 </template>
 <script>
     import demo1 from './demo1.vue';
+    import throttle from '../code-exercise/throttle';
     export default {
         data() {
             return {
@@ -32,10 +33,14 @@
         },
 
         methods: {
-            changeList() {
-                // This.list.push({ name: this.list.length });
-                this.list[0].name = 0;
+            showLog(name) {
+                console.log(name);
             },
+        },
+        created() {
+            this.showLog = throttle(name => {
+                console.log(name);
+            });
         },
     };
 </script>
