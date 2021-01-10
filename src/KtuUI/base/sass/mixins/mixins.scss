@@ -1,0 +1,73 @@
+@mixin flex-center($isHorizontal: true, $isVertical: true){
+	display: flex;
+	@if $isHorizontal {
+		justify-content: center;
+	}
+	@if $isVertical{
+		align-items: center;
+	}
+}
+
+
+@mixin btn-comm() {
+	text-align: center;
+	cursor: pointer;
+	
+	&-primary {
+		background-color: $theme-color;
+		color:#fff;
+		margin-right: 10px;
+
+		&:hover {
+			background-color: $hover-theme-color
+		}
+	}
+
+	&-single {
+		border: 1px solid  $theme-color;;
+		color:  $theme-color;
+
+		&:hover {
+			border-color: $hover-theme-color;
+		}
+	}
+
+	&-normal {
+		border: 1px solid #e0e0e0;
+		color : #444;
+
+		&:hover {
+			border-color: $modal-cancel-btn-hover-border;
+		}
+	}
+}
+
+
+@mixin skeleton-animation(){
+	background: linear-gradient(90deg, #f2f2f2 25%, #e6e6e6 37%, #f2f2f2 63%);
+	background-size: 400% 100%;
+	animation: ant-skeleton-loading 2s ease infinite;
+}
+
+@mixin flex-center($isHorizontal: true, $isVertical: true){
+	display: flex;
+	@if $isHorizontal {
+		justify-content: center;
+	}
+	@if $isVertical{
+		align-items: center;
+	}
+}
+
+@mixin skeleton-animation(){
+	background: linear-gradient(90deg, #f2f2f2 25%, #e6e6e6 37%, #f2f2f2 63%);
+	background-size: 400% 100%;
+	animation: ant-skeleton-loading 2s ease infinite;
+}
+
+@mixin modal-close-btn(){
+    height: 64px;
+    display: flex;
+    align-items: center;
+    top: 0 !important;
+}

@@ -1,0 +1,252 @@
+.multselector {
+    position: relative;
+    min-width: 60px;
+    cursor: pointer;
+    text-align: center;
+
+    &-btn {
+        display: flex;
+        height: 100%;
+
+        &-arrow {
+            @include flex-center;
+            flex-shrink: 0;
+            width: 30px;
+
+            &-svg {
+                width: 8px;
+                height: 5px;
+                fill: #333;
+                transition: transform .3s;
+            }
+        }
+    }
+
+    &-value {
+        font-size: 14px;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    & .opened .multselector-btn-arrow-svg {
+        transform: rotate(180deg);
+    }
+
+    &.multselector-single {
+        .multselector-value {margin-left: 0;}
+        .multselector-btn-arrow {display: none;}
+    }
+
+    &-option {
+        line-height: 32px;
+        text-align: left;
+        text-overflow: ellipsis;
+        cursor: pointer;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+        &:last-child {
+            border:none;
+        }
+
+        &-list {
+            position: absolute;
+            max-height: 540px;
+            width: 260px;
+            z-index: 3;
+            top: 28px;
+            padding: 8px 0px;
+            font-size: 14px;
+            color: #333;
+            border-radius: 3px;
+            background-color: #fff;
+            // box-shadow: $box-shadow;
+            box-shadow:0 2px 6px 0 rgba(0,0,0,0.16);
+            overflow: auto;
+            transform-origin: center top;
+            &.list-new-height{
+                max-height: 320px;
+                .named-type-block{
+                    max-height: 182px;
+                }
+            }
+            .type-item-container {
+                height: 32px;
+                padding : 0 24px;
+                color: #888;
+                border-radius: 2px;
+                &:hover,
+                &.active {
+                    .type-item-name,.type-item-tip{
+                        color: $theme-color;
+                    }
+                }
+                &:hover {
+                    background-color: #FEEFE4;
+
+                    .type-item-name {
+                        color: $theme-color;
+                    }
+                    .type-item-tip {
+                        color: $theme-color;
+                    }
+                }
+                .type-item-name {
+                    font-size: 14px;
+                    color: #444;
+                }
+                .type-item-tip {
+                    font-size: 12px;
+                    color: #bebebe;
+                    display: inline-block;
+                    float: right;
+                }
+                .type-item-svg{
+                    width: 11.698px;
+                    height: 8.251px;
+                    display: inline-block;
+                }
+            }
+            ::-webkit-scrollbar {
+                display: block;
+                width: 2px;
+            }
+            .named-type-block {
+                max-height: 402px;
+                overflow: auto;
+                position: relative;
+                .multselector-option {
+                    margin-top: 16px;
+                    &.fifthType{
+                        // @include flex-center(false, false);
+                        // flex-direction: column;
+                        // overflow: hidden;
+                        margin: 0;
+                        padding: 8px 0;
+                        display: flex;
+                        flex-direction: column;
+                        &:not(:last-of-type) {
+                            padding-bottom: calc(8px + 1px); // 加上分割线的1px 
+                        }
+                        &:not(:last-of-type):after{
+                            width: 108px !important;
+                            left: 16px;
+                            bottom: 0;
+                        }
+                        .type-item-container{
+                            padding: 0 16px !important;
+                            &.active{
+                                @include flex-center;
+                                justify-content: space-between;
+                            }
+                        }
+                    }
+                }
+                .thirdType:first-child,.secondType:first-child {
+                    margin-top: 8px;
+                }
+                .multselector-option:not(:last-of-type):after{
+                    content:"";
+                    display: inline-block;
+                    width: 210px;
+                    height: 1px;
+                    background-color: #F1F1F1;
+                    position: absolute;
+                    left: 24px;
+                    bottom: -8px;
+                    &:last-child:after {
+                        display: none;
+                    }
+                }
+            }
+            .other-type-block {
+                position: relative;
+                .secondType {
+                    margin-bottom: 8px;
+                }
+                &:after{
+                    content:"";
+                    display: inline-block;
+                    width: 260px;
+                    height: 1px;
+                    background-color: #F1F1F1;
+                    position: absolute;
+                    left: 0px;
+                    bottom: -8px;
+                }
+            }
+            .local-type-block {
+                height: 40px;
+                padding: 0 24px;
+                margin-top: 16px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                position: relative;
+                .local-type-icon {
+                    display: inline-block;
+                    position: relative;
+                    padding-bottom: 2px;
+                    .svg-type-social,.svg-type-web,.svg-type-print,.svg-type-business {
+                        fill: #CECECE !important;
+                    }
+                    &:hover svg{
+                        fill: #888888 !important;
+                    }
+                }
+                &:after{
+                    content:"";
+                    display: inline-block;
+                    width: 260px;
+                    height: 1px;
+                    background-color: #F1F1F1;
+                    position: absolute;
+                    left: 0px;
+                    bottom: 0px;
+                }
+                .svg-type {
+                    &-social,&-web,&-print,&-business {
+                        width: 26px;
+                        height: 26px;
+                    }
+                }
+                .localActive{
+                    .svg-type-social,.svg-type-web,.svg-type-print,.svg-type-business {
+                        fill: #888 !important;
+                    }
+                    &:after{
+                        content: '';
+                        position: absolute;
+                        top: 29px;
+                        left: 5px;
+                        height: 0;
+                        width: 0;
+                        border-right: 6px solid #fff;
+                        border-bottom: 7px solid #F1F1F1;
+                        border-left: 6px solid #fff;
+                        background: #F1F1F1;
+                    }
+                }
+            }
+        }
+        .type-title {
+            padding: 0 24px;
+            .type-title-text {
+                font-size: 12px;
+                color: #bbb;
+            }
+        }
+    }
+
+    .firstType {
+        border: none;
+    }
+
+    &.multselector-split {
+        .multselector-option-list {
+            padding: 9px 0;
+            top: calc(100% + 8px);
+        }
+
+        ::-webkit-scrollbar {display: block;}
+    }
+}

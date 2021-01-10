@@ -1,0 +1,181 @@
+.cut-box {
+    position: absolute;
+    transform-origin: center;
+    z-index: 510;
+    cursor: move;
+
+    .cut-box-controls, .dashed-line {
+        position: absolute;
+        left: 0;
+        top: 0;
+        overflow: visible;
+    }
+    .dashed-line {
+        fill: none;
+        stroke-width: 1;
+        stroke-dasharray: 4, 4;
+        mix-blend-mode: normal;
+        .border-line.black {
+            stroke: #333333;
+        }
+        .border-line.white {
+            stroke: #ffffff;
+            stroke-dashoffset: 4;
+        }
+    }
+    &.isOpacity {
+        opacity: 0.4;
+    }
+
+    .cut-box-controls {
+        overflow: visible;
+
+        .cut-box-control {
+            fill: #000;
+            stroke: #fff;
+            stroke-width: 2;
+            pointer-events: auto;
+
+            &:hover,
+            &.pressed {
+                fill: $theme-color;
+            }
+
+            &.hidden {
+                opacity: 0;
+                pointer-events: none;
+            }
+        }
+
+
+        .cut-box-control-line-mt:hover~.cut-box-control-mt,
+        .cut-box-control-line-mr:hover~.cut-box-control-mr,
+        .cut-box-control-line-mb:hover~.cut-box-control-mb,
+        .cut-box-control-line-ml:hover~.cut-box-control-ml {
+            fill: $theme-color;
+        }
+
+        .cut-box-control-line {
+            pointer-events: auto;
+
+            &.hidden {
+                opacity: 0;
+                pointer-events: none;
+            }
+        }
+
+        .cut-box-line {
+            fill: none;
+            stroke-width: 1;
+            stroke-dasharray: 4, 4;
+            mix-blend-mode: normal;
+
+            &.white {
+                stroke: #fff;
+                stroke-dashoffset: 4;
+            }
+
+            &.black {
+                stroke: #666;
+            }
+
+            &.locked {
+                stroke: #f00;
+            }
+        }
+
+        .selectedInGroup {
+            .cut-box-line {
+                opacity: 0;
+            }
+
+            .active {
+                .cut-box-line {
+                    opacity: 1;
+                }
+            }
+        }
+
+        .cut-box-locked {
+            pointer-events: auto;
+
+            .cut-box-locked-circle {
+                fill: #f00;
+                stroke: #fff;
+                stroke-width: 1;
+                cursor: pointer;
+
+                &:hover+.cut-box-locked-icons .cut-box-locked-icon:last-child {
+                    display: none;
+                }
+            }
+
+            .cut-box-locked-icons {
+                pointer-events: none;
+            }
+
+            .cut-box-locked-icon {
+                fill: #fff;
+            }
+        }
+
+        .cut-box-rotate-line {
+            stroke: #555;
+            stroke-width: 1;
+            stroke-dasharray: 2, 2;
+        }
+
+        .cut-box-rotate {
+            cursor: grab;
+            pointer-events: auto;
+
+            &:hover .cut-box-rotate-icon,
+            &.pressed .cut-box-rotate-icon {
+                fill: $theme-color;
+            }
+        }
+
+        .cut-box-rotate-circle {
+            fill: transparent;
+        }
+    }
+
+    .cut-box-radius {
+        pointer-events: auto;
+
+        .radius-size {
+            .radius-size-line {
+                stroke-width: 1;
+                stroke-dasharray: 2, 2;
+            }
+
+            .radius-size-line:first-child {
+                stroke: #000;
+            }
+
+            .radius-size-line:nth-child(2) {
+                stroke: #fff;
+                stroke-dashoffset: 2;
+            }
+
+            .radius-size-area {
+                stroke-width: 12;
+                stroke: transparent;
+            }
+
+            &.pressed .radius-size-triangle,
+            &:hover .radius-size-triangle {
+                fill: $theme-color;
+            }
+        }
+
+        .radius-position {
+            cursor: pointer;
+
+            &:hover {
+                fill: $theme-color;
+            }
+        }
+    }
+
+}

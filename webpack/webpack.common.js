@@ -11,7 +11,7 @@ module.exports = function (config) {
 
     return {
         entry: {
-            index: `./src/${project}/index.ts`,
+            index: `./src/${project}/user.ts`,
         },
         optimization: {
             splitChunks: {
@@ -88,9 +88,10 @@ module.exports = function (config) {
                     {
                         path: 'url-loader',
                         options: {
-                            limit: 1000,
-                            outputPath: 'images/',
-                            fallback: 'file-loader',
+                            limit: 5000,
+                            esModule: false,
+                            outputPath: 'images',
+                            name: '[name].[ext]?v=[hash]',
                         },
                     },
                 ],

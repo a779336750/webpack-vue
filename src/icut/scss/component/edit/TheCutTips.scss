@@ -1,0 +1,57 @@
+.cut-tips {
+    width:92px;
+    height:32px;
+    background:rgba(255,255,255,1);
+    opacity:1;
+    border-radius:4px;
+    position: absolute;
+    left: 0;
+    top: -48px;
+    @include flex-center;
+    z-index: 1;
+
+    .devider {
+        width:1px;
+        height:9px;
+        background:rgba(230,230,230,1);
+        margin: 0 4px 0 0;
+    }
+
+    .tooltip-popper {
+        margin-top: -3px;
+    }
+
+    .cut-btn {
+        border-radius:2px;
+        width: 24px;
+        height: 24px;
+        border: none;
+        padding: 0;
+        margin-right: 2px;
+        i {
+            width: 24px;
+            height: 24px;
+            svg {
+                fill: #999999;
+            }
+        }
+
+        .active {
+            i {
+                svg {
+                    fill: $theme-color;
+                }
+            }
+
+        }
+
+        &:hover {
+            background:rgba(240,240,240,1);
+            i {
+                svg {
+                    fill: $theme-color !important;
+                }
+            }
+        }
+    }
+}

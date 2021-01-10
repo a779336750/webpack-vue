@@ -1,0 +1,38 @@
+.breadcrumb {
+    color:  $breadcrumb-font-color;
+    font-size: 14px;
+
+    a {
+        color: $breadcrumb-font-color;
+        transition: color .2s ease-in-out;
+    }
+    &-item {
+        .icon {
+            position: relative;
+            top: -1px;
+        }
+        .svg-icon {
+            fill : $breadcrumb-font-color;
+        }
+        &:last-child {
+            font-weight: bold;
+
+            .breadcrumb-item-separator{
+                display: none;
+            }
+        }
+        &-separator {
+            margin: 0 8px;
+            color: $breadcrumb-separator-color;
+        }
+
+        &:hover {
+            a {
+                color : $theme-color;
+            }
+            .svg-icon {
+                fill : $theme-color;
+            }
+        }
+    }
+}

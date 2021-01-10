@@ -1,0 +1,185 @@
+.consult-more{
+    position: relative;
+    .dropdown-rel-active{
+        &>.btn{
+            .icon{
+                svg{
+                    fill: #999;
+                }
+            }
+        }
+    }
+    .more-btn{
+        display: block;
+        height: 60px;
+        border: none;
+        border-radius: 0;
+        border-left: 1px solid #eee;
+        background: #fff;
+        color: #333;
+        width: 100px;
+        box-sizing: content-box;
+        span{
+            margin-left: 2.5px;
+        }
+        svg{
+            fill: #999;
+        }
+        &:hover{
+            background: #FEEFE4;
+            color:#f73;
+            svg{
+                fill: #f73 !important;
+            }
+        }
+    }
+    .select-dropdown{
+        left:0 !important;
+        position: absolute;
+        padding: 8px 0;
+        width: 128px;
+        height: auto;
+        top: 60px;
+        color: #444;
+        z-index: 99;
+        text-align: center;
+        background-color: #fff;
+        box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.15);
+        border-top: 2px solid $theme-color;
+        border-radius: 0;
+        margin:0;
+        border-bottom-left-radius: 3px;
+        border-bottom-right-radius: 3px;
+        &::before {
+            content: '';
+            position: absolute;
+            left: auto;
+            left: 44px;
+            top: -16px;
+            border: 8px solid transparent;
+            border-bottom-color: $theme-color;
+        }
+        &::after {
+            content: '';
+            position: absolute;
+            left: auto;
+            left: 45.5px;
+            top: -11px;
+            border: 6px solid transparent;
+            border-bottom-color: #fff;
+        }
+        .line{
+            display: flex;
+            align-items: center;
+            padding-left: 18px;
+            font-size: 14px;
+            cursor: pointer;
+            line-height: 32px;
+            height: 32px;
+            .nav-icon{
+                height: 26px;
+                width: 26px;
+                margin-right: 3px;
+                fill: #888;
+            }
+            &:hover {
+                color: $theme-color;
+                background-color: rgba($theme-color,.1);
+
+                .nav-icon {fill: $theme-color;}
+            }
+        }
+    }
+}
+.consult-modal {
+    .modal{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        .modal-content{
+            overflow: hidden;
+        }
+    }
+    .modal-body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 386px;
+        height: 322px;
+        font-size: 14px;
+    }
+    .modal-close {
+        top: 18px;
+        right:24px;
+    }
+
+    .modal-img {
+        width: 150px;
+        height: 104px;
+        margin-top: 36px;
+        background-size: cover;
+        background-image: url("../../../images/consult-modal-img.png");
+    }
+
+    .modal-text {
+        margin-bottom: 12px;
+        color: #222;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .modal-tip {
+        position: relative;
+        color : #222;
+        font-size: 15px;
+
+        &::before,
+        &::after {
+            position: absolute;
+            width: 10px;
+            height: 2px;
+            top: 50%;
+            content: "";
+            background-color: #222;
+            transform: translateY(-50%);
+        }
+
+        &::before {
+            right: calc(100% + 12px);
+        }
+        &::after {
+            left: calc(100% + 12px);
+        }
+    }
+
+    .modal-qq {
+        @include flex-center;
+        margin: 14px 0 18px;
+        color : #b0b0b0;
+        font-size: 12px;
+        .icon {
+            width: 10px;
+            height: 10px;
+            margin-right: 4px;
+            background-size: cover;
+            background-image: url("../../../images/qq.png");
+        }
+    }
+
+    .modal-btn {
+        @include flex-center;
+        width: 100px;
+        height: 32px;
+        color: #fff;
+        cursor: pointer;
+        border-radius: 16px;
+        background-color: #f73;
+        font-size: 14px;
+
+        &:hover {
+            background-color: #ff884d;
+        }
+    }
+}
+

@@ -1,0 +1,107 @@
+$divider-prefix-cls: divider;
+
+.#{$divider-prefix-cls} {
+    @include reset-component();
+    background: #e6e6e6;
+
+    &, // for compatiable
+    &-gray-bg {
+        background: #e6e6e6;
+    }
+
+    &-vertical {
+        margin: 0 8px;
+        display: inline-block;
+        height: 0.9em;
+        width: 1px;
+        vertical-align: middle;
+        position: relative;
+        top: -0.06em;
+    }
+    &-horizontal {
+        display: block;
+        height: 1px;
+        width: 100%;
+        min-width: 100%;
+        margin: 24px 0;
+        clear: both;
+    }
+    &-horizontal.#{$divider-prefix-cls}-with-text-center,
+    &-horizontal.#{$divider-prefix-cls}-with-text-left,
+    &-horizontal.#{$divider-prefix-cls}-with-text-right {
+        display: table;
+        white-space: nowrap;
+        text-align: center;
+        background: transparent;
+        font-weight: 500;
+        color: $title-color;
+        font-size: $font-size-large;
+        margin: 16px 0;
+        &:before,
+        &:after {
+            content: '';
+            display: table-cell;
+            position: relative;
+            top: 50%;
+            width: 50%;
+            border-top: 1px solid $border-color-split;
+            transform: translateY(50%);
+        }
+    }
+
+    &-horizontal.#{$divider-prefix-cls}-small.#{$divider-prefix-cls}-with-text-center,
+    &-horizontal.#{$divider-prefix-cls}-small.#{$divider-prefix-cls}-with-text-left,
+    &-horizontal.#{$divider-prefix-cls}-small.#{$divider-prefix-cls}-with-text-right{
+        font-size: $font-size-base;
+        margin: 8px 0;
+    }
+
+    &-horizontal.#{$divider-prefix-cls}-with-text-left,
+    &-horizontal.#{$divider-prefix-cls}-with-text-right {
+        .#{$divider-prefix-cls}-inner-text {
+            display: inline-block;
+            padding: 0 10px;
+        }
+    }
+
+    &-horizontal.#{$divider-prefix-cls}-with-text-left {
+        &:before {
+            top: 50%;
+            width: 5%;
+        }
+        &:after {
+            top: 50%;
+            width: 95%;
+        }
+    }
+
+    &-horizontal.#{$divider-prefix-cls}-with-text-right {
+        &:before {
+            top: 50%;
+            width: 95%;
+        }
+        &:after {
+            top: 50%;
+            width: 5%;
+        }
+    }
+
+    &-inner-text {
+        display: inline-block;
+        padding: 0 24px;
+    }
+
+    &-dashed {
+        background: none;
+        border-top: 1px dashed $border-color-split;
+    }
+    &-horizontal.#{$divider-prefix-cls}-with-text.#{$divider-prefix-cls}-dashed,
+    &-horizontal.#{$divider-prefix-cls}-with-text-left.#{$divider-prefix-cls}-dashed,
+    &-horizontal.#{$divider-prefix-cls}-with-text-right.#{$divider-prefix-cls}-dashed {
+        border-top: 0;
+        &:before,
+        &:after {
+            border-style: dashed none none;
+        }
+    }
+}

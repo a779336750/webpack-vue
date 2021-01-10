@@ -1,0 +1,129 @@
+.upload-page {
+  width: 100%;
+  height: 100%;
+  background: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  @include flex-center();
+
+  .upload-box {
+    width: 1280px;
+    height: 606px;
+    background: #fff;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
+    opacity: 1;
+    border-radius: 4px;
+    transition: all 0.3s;
+    position: relative;
+
+    &:hover {
+      .dashed-box {
+        border: 2px solid #f73;
+      }
+    }
+    .dashed-box {
+      width: 1248px;
+      height: 574px;
+      border: 2px dashed #f73;
+      cursor: pointer;
+      transition: all 0.3s;
+      border-radius: 4px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      position: absolute;
+    }
+
+    .svg-container {
+      height: 80px;
+      width: 100%;
+      text-align: center;
+      margin-top: 203px;
+
+      .icon {
+        width: 80px;
+        height: 80px;
+      }
+    }
+    .upload-img-dec, .upload-img-tips {
+      text-align: center;
+      font-family: Microsoft YaHei;
+      transition: all 0.3s;
+    }
+    .upload-img-dec {
+      margin-top: 32px;
+      height: 26px;
+      font-size: 20px;
+      font-weight: bold;
+      line-height: 26px;
+      color: #333333;
+    }
+
+    &.dragover, &:hover {
+      .dashed-box {
+        border: 2px solid #f73;
+      }
+      .upload-img-dec, .upload-img-tips {
+        color: $theme-color;
+      }
+    }
+    .upload-img-tips {
+      margin-top: 12px;
+      height: 19px;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 19px;
+      color: #999999;
+    }
+  }
+
+}
+
+
+.uploading-modal, .vertical-center-modal {
+  @include flex-center;
+
+  .modal {
+    top: 0;
+    width: 135px !important;
+    border-radius: 4px;
+    @include flex-center;
+
+    .modal-body {
+      padding: 0;
+    }
+
+    .uploading-modal-content {
+      @include flex-center;
+      flex-direction: column;
+      width: 135px;
+      height: 135px;
+      text-align: center;
+
+      .loading-wrapper {
+        margin: 0 auto;
+        width: 36px;
+        height: 36px;
+        animation: rotation .3s infinite linear;
+        text-align: center;
+
+        .svg-alert-loading {
+          width: 36px;
+          height: 36px;
+        }
+      }
+
+      .loading-tips {
+        font-size: 14px;
+        margin-top: 12px;
+      }
+    }
+
+
+  }
+
+  .modal-footer {
+    display: none;
+
+  }
+}

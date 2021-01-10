@@ -1,0 +1,210 @@
+<style lang="scss" >
+.demo-spin-container {
+    display: inline-block;
+    width: 200px;
+    height: 100px;
+    position: relative;
+    border: 1px solid #eee;
+}
+
+.demo-spin-icon-load {
+    animation: ani-demo-spin 1s linear infinite;
+}
+@keyframes ani-demo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+.demo-spin-col {
+    height: 100px;
+    position: relative;
+    border: 1px solid #eee;
+}
+
+.demo-spin-article {
+    width: 400px;
+    height: 200px;
+    padding: 10px;
+    text-align: center;
+    position: relative;
+    border: 1px solid #eee;
+}
+.demo-spin-icon-load {
+    animation: ani-demo-spin 1s linear infinite;
+}
+</style>
+
+<template>
+    <div class="menu-view">
+        <h2>Spin 加载中</h2>
+
+        <div class="view-list">
+
+            <h3>基本结构</h3>
+            <template>
+                <Spin></Spin>
+            </template>
+        </div>
+
+        <div class="view-list">
+
+            <h3>尺寸</h3>
+            <template>
+                <Spin size="small"></Spin>
+                <Spin></Spin>
+                <Spin size="large"></Spin>
+            </template>
+        </div>
+
+        <div class="view-list">
+
+            <h3>居中固定</h3>
+            <template>
+                <div class="demo-spin-container">
+                    <Spin fix></Spin>
+                </div>
+            </template>
+        </div>
+
+        <div class="view-list">
+
+            <h3>快图项目中，图片或者作品的加载</h3>
+            <template>
+                <div
+                    class="demo-spin-container"
+                    style="width:400px;height:300px;"
+                >
+                    <Spin
+                        fix
+                        type="imgload"
+                    >
+                    </Spin>
+                </div>
+
+                <div
+                    class="demo-spin-container"
+                    style="width:400px;height:300px;"
+                >
+                    <Spin
+                        fix
+                        type="imgload"
+                    >正在导入
+                    </Spin>
+                </div>
+            </template>
+        </div>
+
+        <div class="view-list">
+
+            <h3>自定义内容</h3>
+            <template>
+                <Row>
+                    <Col
+                        class="demo-spin-col"
+                        span="8"
+                    >
+                    <Spin fix>加载中...</Spin>
+                    </Col>
+                    <Col
+                        class="demo-spin-col"
+                        span="8"
+                    >
+                    <Spin fix>
+                        <Icon
+                            type="ios-loading"
+                            size=18
+                            class="demo-spin-icon-load"
+                        ></Icon>
+                        <div>Loading</div>
+                    </Spin>
+                    </Col>
+
+                </Row>
+            </template>
+        </div>
+
+        <div class="view-list">
+
+            <h3>状态切换</h3>
+            <template>
+                <div class="demo-spin-article">
+                    <h3>登金陵凤凰台</h3>
+                    <address>李白</address>
+                    <article>
+                        <p>凤凰台上凤凰游，凤去台空江自流。</p>
+                        <p>吴宫花草埋幽径，晋代衣冠成古丘。</p>
+                        <p>三山半落青天外，二水中分白鹭洲。</p>
+                        <p>总为浮云能蔽日，长安不见使人愁。</p>
+                    </article>
+                    <Spin
+                        size="large"
+                        fix
+                        v-if="spinShow"
+                    ></Spin>
+                </div>
+                <br>
+                切换显示状态：<i-switch @on-change="spinShow = !spinShow"></i-switch>
+            </template>
+        </div>
+
+        <div class="view-list">
+
+            <h3>整页加载</h3>
+            <template>
+                <div>
+                    <Button
+                        type="primary"
+                        @click="handleSpinShow"
+                    >整页显示，3秒后关闭</Button>
+                    <Button
+                        type="primary"
+                        @click="handleSpinCustom"
+                    >自定义显示内容</Button>
+                </div>
+            </template>
+        </div>
+    </div>
+</template>
+<script>
+export default {
+    data() {
+        return {
+            spinShow: true
+        };
+    },
+    computed: {},
+    methods: {
+        handleSpinShow() {
+            this.$Spin.show();
+            setTimeout(() => {
+                this.$Spin.hide();
+            }, 3000);
+        },
+        handleSpinCustom() {
+            this.$Spin.show({
+                render: h => {
+                    return h("div", [
+                        h("Icon", {
+                            class: "demo-spin-icon-load",
+                            props: {
+                                type: "ios-loading",
+                                size: 18
+                            }
+                        }),
+                        h("div", "Loading")
+                    ]);
+                }
+            });
+            setTimeout(() => {
+                // this.$Spin.hide();
+            }, 3000);
+        }
+    }
+};
+</script>

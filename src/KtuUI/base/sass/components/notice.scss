@@ -1,0 +1,118 @@
+$notice-prefix-cls: notice;
+$icon-prefix-cls: icon;
+
+$notice-width: 335px;
+$notice-padding: 16px;
+$notice-margin-bottom: 10px;
+
+.#{$notice-prefix-cls} {
+    width: $notice-width;
+    margin-right: 24px;
+    position: fixed;
+    z-index: $zindex-notification;
+
+    &-content-with-icon{
+        margin-left: 51px;
+    }
+    &-with-desc.#{$notice-prefix-cls}-with-icon &-title{
+        margin-left: 51px;
+    }
+
+    &-notice {
+        margin-bottom: $notice-margin-bottom;
+        padding: $notice-padding;
+        // border: 1px solid $border-color-split;
+        border-radius: $border-radius-small;
+        box-shadow: $shadow-base;
+        background: #fff;
+        line-height: 1;
+        position: relative;
+        overflow: hidden;
+
+        &-close {
+            position: absolute;
+            right: 8px;
+            top: 15px;
+            color: #999;
+            outline: none;
+
+            i{
+                @include close-base(-3px);
+            }
+        }
+
+        &-content-with-render{
+            .notice-desc{
+                display: none;
+            }
+        }
+
+        &-with-desc{
+            .#{$notice-prefix-cls}-notice-close{
+                top: 11px;
+            }
+        }
+    }
+
+    &-content-with-render-notitle{
+        margin-left: 26px;
+    }
+
+    &-title {
+        font-size: $font-size-base;
+        line-height: $font-size-base + 3;  //fixed the bug that the bottom of some letters were hidden just like 'g'
+        color: $title-color;
+        padding-right: 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    &-with-desc &-title{
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+
+    &-desc {
+        font-size: 12px;
+        //color: $legend-color;
+        color: $text-color;
+        text-align: justify;
+        line-height: 1.5;
+    }
+    &-with-desc.#{$notice-prefix-cls}-with-icon &-desc{
+        margin-left: 51px;
+    }
+
+    &-with-icon &-title{
+        margin-left: 26px;
+    }
+
+    &-icon {
+        position: absolute;
+        top: -2px;
+        font-size: $font-size-large;
+
+        &-success {
+            color: $success-color;
+        }
+        &-info {
+            color: $primary-color;
+        }
+        &-warning {
+            color: $warning-color;
+        }
+        &-error {
+            color: $error-color;
+        }
+    }
+    &-with-desc &-icon{
+        .icon {
+            width: 36px;
+            height: 36px;
+        }
+    }
+
+    &-custom-content{
+        position: relative;
+    }
+}

@@ -11,7 +11,7 @@ const Config = {
     // 服务器环境有效值
     DevEnvs: ['dev', 'prepro', 'prod'],
 
-    ProjectList: ['ktu', 'blog', 'mark', 'ts'],
+    ProjectList: ['ktu', 'blog', 'mark', 'ts', 'tsDemo', 'icut'],
 };
 
 module.exports = Config;

@@ -1,0 +1,41 @@
+$icon-prefix-cls: icon;
+
+@mixin content-header() {
+    border-bottom: 1px solid $border-color-split;
+    padding: 19px 24px;
+    line-height: 1;
+
+    p,
+    &-inner
+    {
+        display: inline-block;
+        width: 100%;
+        height: 20px;
+        line-height: 20px;
+        font-size: $font-size-base;
+        color: $title-color;
+        font-weight: bold;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    p i, p span{
+        vertical-align: middle;
+    }
+}
+
+@mixin content-close($top: 0, $icon-font-size: 12px) {
+    position: absolute;
+    right: 23px;
+    top: 20px;
+    overflow: hidden;
+    cursor: pointer;
+
+    @include icon-size($icon-font-size);
+
+    @include icon-color($close-color);
+
+    &:hover {
+        @include icon-color($close-color-hover);
+    }
+}

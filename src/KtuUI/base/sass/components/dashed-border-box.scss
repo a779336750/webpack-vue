@@ -1,0 +1,39 @@
+$progress-prefix-cls: "dashed-border-box";
+
+.#{$progress-prefix-cls} {
+    overflow: hidden;
+    position: relative;
+    color: #E0E0E0;
+    cursor: pointer;
+    &-svg {
+        fill: transparent;
+        overflow: hidden;
+        position: absolute;
+        .border-line {
+            fill: none;
+            stroke-dasharray: 6, 6;
+            mix-blend-mode: normal;
+        }
+        .corner {
+            fill: #fff;
+        }
+    }
+
+    &:hover {
+        color: $theme-color;
+        .#{$progress-prefix-cls}-svg {
+            svg {
+                fill: $theme-color;
+            }
+            .border-line {
+                stroke: $theme-color !important;
+                stroke-dasharray: none;
+            }
+            .corner {
+                fill: #fff;
+                stroke: $theme-color !important;
+            }
+        }
+    }
+}
+

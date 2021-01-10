@@ -1,0 +1,79 @@
+$dropdown-prefix-cls: dropdown;
+$dropdown-item-prefix-cls: dropdown-item;
+
+.#{$dropdown-prefix-cls} {
+    display: inline-block;
+    //position: relative;
+
+    .#{$select-dropdown-prefix-cls} {
+        overflow: visible;
+        max-height: none;
+    }
+    .#{$dropdown-prefix-cls} {
+        width: 100%;
+    }
+
+    &-rel {
+        //display: inline-block;
+        position: relative;
+        &-user-select-none{
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        > .btn {
+            min-width: 100px;
+            padding: 2px 0;
+            text-align: left;
+            text-indent: 12px;
+            .icon {
+                float:right;
+                svg {
+                    fill: #888;
+                }
+            }
+            &:hover {
+                border-color: $theme-color;
+                color: $theme-color;
+                background-color: #fff;
+                svg {
+                    fill: $theme-color;
+                }
+            }
+        }
+
+        &-active {
+            > .btn {
+                min-width: 100px;
+                box-sizing: border-box;
+                padding: 2px 0;
+                text-align: left;
+                text-indent: 12px;
+                border: 1px solid $theme-color;
+                color: $theme-color;
+                background-color: #fff;
+                svg {
+                    fill: $theme-color;
+                }
+                .icon {
+                    float:right;
+                    svg {
+                        fill: $theme-color;
+                    }
+                }
+            }
+        }
+
+    }
+
+    &-menu{
+        min-width: 100px;
+    }
+
+    &-transfer{
+        width: auto;
+    }
+}
+
+@include select-item($dropdown-prefix-cls, $dropdown-item-prefix-cls);

@@ -60,16 +60,22 @@ module.exports = function (project) {
                     {
                         test: /\.(sass|scss)$/,
                         use: [
+                            'css-hot-loader',
                             {
-                                loader: 'style-loader',
+                                // 使用MiniCssExtractPlugin.loader替代style-loader
+                                loader: MiniCssExtractPlugin.loader,
+                                options: {
+                                    // 解决图片路径不对的问题
+                                    publicPath: '../',
+                                },
                             },
-                            MiniCssExtractPlugin.loader,
                             {
                                 loader: 'css-loader',
                                 options: {
                                     importLoaders: 2,
                                 },
                             },
+                              'resolve-url-loader',
                             {
                                 loader: 'sass-loader',
                                 options: {

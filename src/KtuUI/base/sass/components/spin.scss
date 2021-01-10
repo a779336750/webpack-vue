@@ -1,0 +1,166 @@
+$spin-prefix-cls: spin;
+$spin-dot-size-small: 12px;
+$spin-dot-size: 20px;
+$spin-dot-size-large: 32px;
+
+.#{$spin-prefix-cls} {
+    color: $primary-color;
+    vertical-align: middle;
+    text-align: center;
+
+    &-dot {
+        position: relative;
+        display: block;
+        border-radius: 50%;
+        background-color: $primary-color;
+        @include square($spin-dot-size);
+        animation: ani-spin-bounce 1s 0s ease-in-out infinite;
+    }
+
+    &-large &-dot {
+        @include square($spin-dot-size-large);
+    }
+
+    &-small &-dot {
+        @include square($spin-dot-size-small);
+    }
+
+    &-fix {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: $zindex-spin;
+        @include square(100%);
+        background-color: rgba(255,255,255,.9);
+    }
+    &-fullscreen{
+        z-index: $zindex-spin-fullscreen;
+        &-wrapper{
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+    }
+
+    &-fix &-main {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+
+    &-imgload {
+        background:rgba($color: #000000, $alpha: 0.7);
+    }
+
+    &-imgload &-main {
+        width:135px;
+        height:135px;
+        background:#fff;
+        box-shadow:0px 3px 6px rgba(0,0,0,0.16);
+        border-radius:4px;
+
+        .loader {
+            top:27px;
+            left: 50px;
+        }
+
+        .load-text {
+            position: absolute;
+            bottom:31px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color : #333;
+        }
+    }
+
+    &-fix &-dot {
+        display: inline-block;
+    }
+
+    &-text,
+    &-show-text &-dot {
+        display: none;
+    }
+
+    &-show-text &-text {
+        display: block;
+    }
+}
+
+// use in Table loading, Table right border is not included in .ivu-table-wrapper, so fix it
+.#{$table-prefix-cls}-wrapper{
+    > .#{$spin-prefix-cls}-fix{
+        border: 1px solid $border-color-base;
+        border-top: 0;
+        border-left: 0;
+    }
+}
+
+@keyframes ani-spin-bounce {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+.loader {
+    width: 36px;
+    height: 36px;
+    position: absolute;
+
+    .circular {
+        animation: rotate 2s linear infinite;
+        height: 100%;
+        transform-origin: center center;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto
+    }
+    .path-thumb {
+        stroke: tint($primary-color, 80%);
+    }
+    .path-bar {
+        stroke-dasharray: 1,200;
+        stroke-dashoffset: 0;
+        animation: dash 1.5s ease-in-out infinite,color 6s ease-in-out infinite;
+        stroke-linecap: round;
+        stroke: $theme-color;
+    }
+}
+
+@keyframes rotate {
+    to {
+        -webkit-transform: rotate(1turn);
+        transform: rotate(1turn)
+    }
+}
+
+@keyframes dash {
+    0% {
+        stroke-dasharray: 1,200;
+        stroke-dashoffset: 0
+    }
+
+    50% {
+        stroke-dasharray: 89,200;
+        stroke-dashoffset: -35
+    }
+
+    to {
+        stroke-dasharray: 89,200;
+        stroke-dashoffset: -124
+    }
+}
